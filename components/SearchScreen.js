@@ -27,7 +27,7 @@ const styles = StyleSheet.create({
     textInputSyle:{
         marginLeft: 5,
         marginRight: 5,
-        height: 30,
+        height: 50,
         borderColor: '#000000',
         borderWidth: 0.3,
         paddingLeft: 5
