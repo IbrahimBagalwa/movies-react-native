@@ -25,7 +25,6 @@ class SearchScreen extends React.Component {
                     films: [...this.state.films,...data.results],
                     isLoading:false
                 })})
-            
         }
     }
     _searchTextInputChanged(text){
