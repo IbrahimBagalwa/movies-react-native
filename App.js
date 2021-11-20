@@ -1,9 +1,11 @@
 
 import React from 'react';
-import SearchScreen from './components/SearchScreen';
+import Navigation from './Navigation/Navigation';
 
-export default function App() {
-  return (
-   <SearchScreen/>
-  );
+export default class App extends React.Component {
+  render(){
+    return (
+      <Navigation/>
+    )
+  }
 }

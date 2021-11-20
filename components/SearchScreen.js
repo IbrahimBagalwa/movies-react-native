@@ -78,7 +78,6 @@ class SearchScreen extends React.Component {
 
 const styles = StyleSheet.create({
     main_container:{
-        marginTop:20,
         flex: 1,
     },
     textInputSyle:{
