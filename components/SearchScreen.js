@@ -50,6 +50,10 @@ class SearchScreen extends React.Component {
             this._loadFilms()
         })
     }
+    _displaydDetailFromFilm = (idFilm)=>{
+        // console.log("Display film detail id" + idFilm);
+        this.props.navigation.navigate("FilmDetail",{idFilm: idFilm})
+    }
  render(){
     //  console.log(this.state.isLoading);
      return(
@@ -68,7 +72,7 @@ class SearchScreen extends React.Component {
                 onEndReached={()=>{if(this.page <this.totalPages){
                     this._loadFilms()
                 }}}
-                renderItem={({item})=><FilmsItem film={item}/>}
+                renderItem={({item})=><FilmsItem film={item} displayDetailForFilm={this._displaydDetailFromFilm} />}
              />
              {this._displayLoading()}
          </View>

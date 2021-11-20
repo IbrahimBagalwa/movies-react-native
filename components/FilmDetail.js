@@ -3,9 +3,10 @@ import { StyleSheet, View, Text } from 'react-native';
 
 class FilmDetail extends React.Component{
     render() {
+        const idFilm = this.props.navigation.state.params.idFilm
         return(
             <View style={styles.main_container}>
-                <Text>Film Detail</Text>
+                <Text>Film Detail {idFilm}</Text>
             </View>
         )
     }
