@@ -1,5 +1,7 @@
 import React from 'react';
-import { StyleSheet, View, Text } from 'react-native';
+import { StyleSheet, View, Text, ActivityIndicator } from 'react-native';
+import { ScrollView } from 'react-native-gesture-handler';
+import { getFilmDetailFromApi } from '../API/TMDBApi';
 
 class FilmDetail extends React.Component{
     constructor(props){
@@ -7,6 +9,23 @@ class FilmDetail extends React.Component{
         this.state= {
             film :undefined,
             isLoading : true
+        }
+    }
+    componentDidMount(){
+        getFilmDetailFromApi(this.props.navigation.state.params.idFilm)
+        .then(data=>{
+            this.setState({
+                film: data,
+                isLoading: false,
+            })
+        })
+    }
+    _displayFilm(){
+        const film = this.state.film
+        if(film != undefined){
+           <ScrollView style={styles.scrollview_container}>
+
+           </ScrollView>
         }
     }
     _displayLoading(){
@@ -22,7 +41,7 @@ class FilmDetail extends React.Component{
         const idFilm = this.props.navigation.state.params.idFilm
         return(
             <View style={styles.main_container}>
-                <Text>Film Detail {idFilm}</Text>
+                {this._displayLoading()}
             </View>
         )
     }
@@ -36,10 +55,13 @@ const styles = StyleSheet.create({
         position: 'absolute',
         left: 0,
         right: 0,
-        top: 100,
+        top: 0,
         bottom: 0,
         alignItems:'center',
         justifyContent:'center'
+    },
+    scrollview_container:{
+        flex: 1,
     }
 })
 export default FilmDetail
