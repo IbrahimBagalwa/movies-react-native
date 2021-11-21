@@ -12,6 +12,7 @@ class FilmDetail extends React.Component{
         }
     }
     componentDidMount(){
+        console.log('component did mount')
         getFilmDetailFromApi(this.props.navigation.state.params.idFilm)
         .then(data=>{
             this.setState({
@@ -23,9 +24,11 @@ class FilmDetail extends React.Component{
     _displayFilm(){
         const film = this.state.film
         if(film != undefined){
-           <ScrollView style={styles.scrollview_container}>
-
-           </ScrollView>
+            return(
+                <ScrollView style={styles.scrollview_container}>
+                    <Text style={styles.header_text_detail} >{film.title}</Text>
+                </ScrollView>
+            )
         }
     }
     _displayLoading(){
@@ -38,9 +41,11 @@ class FilmDetail extends React.Component{
         }
     }
     render() {
+        console.log('render')
         const idFilm = this.props.navigation.state.params.idFilm
         return(
             <View style={styles.main_container}>
+                {this._displayFilm()}
                 {this._displayLoading()}
             </View>
         )
@@ -62,6 +67,11 @@ const styles = StyleSheet.create({
     },
     scrollview_container:{
         flex: 1,
+    },
+    header_text_detail:{
+        textAlign: 'center',
+        fontSize: 30,
+        fontWeight: 'bold'
     }
 })
 export default FilmDetail
