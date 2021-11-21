@@ -27,6 +27,7 @@ class FilmDetail extends React.Component{
             return(
                 <ScrollView style={styles.scrollview_container}>
                     <Text style={styles.header_text_detail} >{film.title}</Text>
+                    <Text style={styles.desc_text_deatail} >{film.overview}</Text>
                 </ScrollView>
             )
         }
@@ -71,7 +72,11 @@ const styles = StyleSheet.create({
     header_text_detail:{
         textAlign: 'center',
         fontSize: 30,
-        fontWeight: 'bold'
+        fontWeight: 'bold',
+        margin:5
+    },
+    desc_text_deatail:{
+        fontStyle: 'italic'
     }
 })
 export default FilmDetail
