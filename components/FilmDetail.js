@@ -32,7 +32,7 @@ class FilmDetail extends React.Component{
                     />
                     <Text style={styles.header_text_detail} >{film.title}</Text>
                     <Text style={styles.desc_text_deatail} >{film.overview}</Text>
-                    <View>
+                    <View style={styles.default_text}>
                         <Text>Sortie le : {film.release_date}</Text>
                         <Text>Note : {film.release_date}</Text>
                         <Text>Nombre de votes : {film.release_date}</Text>
@@ -87,14 +87,26 @@ const styles = StyleSheet.create({
     },
     header_text_detail:{
         textAlign: 'center',
-        fontSize: 30,
+        fontSize: 35,
+        flex: 1,
+        flexWrap:'wrap',
         fontWeight: 'bold',
-        marginTop:5
+        marginLeft:5,
+        marginRight:5,
+        marginTop:10,
+        marginBottom:10,
+        color:'#000000'
     },
     desc_text_deatail:{
         fontStyle: 'italic',
         color: '#666666',
         margin: 5,
+        marginBottom:15,
+    },
+    default_text:{
+        marginTop: 5,   
+        marginLeft: 5,
+        marginRight: 5,   
     }
 })
 export default FilmDetail
