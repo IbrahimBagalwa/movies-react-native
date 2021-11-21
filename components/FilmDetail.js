@@ -25,7 +25,6 @@ class FilmDetail extends React.Component{
     }
     _displayFilm(){
         const film = this.state.film
-        console.log(film)
         if(film != undefined){
             return(
                 <ScrollView style={styles.scrollview_container}>
@@ -34,9 +33,9 @@ class FilmDetail extends React.Component{
                         source={{uri: getImageFromApi(film.backdrop_path)}} 
                     />
                     <Text style={styles.header_text_detail} >{film.title}</Text>
-                    <Text style={styles.desc_text_deatail} >{film.overview}</Text>
+                    <Text style={styles.desc_text_deatail} >{ film.overview ? film.overview : 'Aucune description pour le moment'}</Text>
                     <Text style={styles.default_text}>Sortie le : {moment(new Date(film.release_date)).format('DD/MM/YYYY')}</Text>
-                    <Text style={styles.default_text}>Note : {film.vote__average ? film.vote__average:0 }/10 </Text>
+                    <Text style={styles.default_text}>Note : {film.vote_average ? film.vote_average:0 }/10 </Text>
                     <Text style={styles.default_text}>Nombre de votes : {film.vote_count}</Text>
                     <Text style={styles.default_text}>Budget : {numeral(film.budget).format('0.0[.]00 $') }</Text>
                     <Text style={styles.default_text}>Genre(s) : {film.genres.map((genre)=>{return genre.name;}).join(" / ")}</Text>
