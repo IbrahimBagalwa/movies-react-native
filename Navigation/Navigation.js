@@ -10,8 +10,11 @@ const SearchStackNavigator = createStackNavigator({
             title: "Rechercher"
         }
     },
-    FilmDetail:{
+    Datail:{
         screen:FilmDetail,
+        navigationOptions:{
+            title:"Detail"
+        }
     }
 })
 export default createAppContainer(SearchStackNavigator)

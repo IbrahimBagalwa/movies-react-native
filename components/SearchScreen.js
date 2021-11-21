@@ -51,7 +51,7 @@ class SearchScreen extends React.Component {
     }
     _displaydDetailFromFilm = (idFilm)=>{
         // console.log("Display film detail id" + idFilm);
-        this.props.navigation.navigate("FilmDetail",{idFilm: idFilm})
+        this.props.navigation.navigate("Detail",{idFilm: idFilm})
     }
  render(){
     //  console.log(this.state.isLoading);
