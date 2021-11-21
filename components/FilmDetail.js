@@ -25,6 +25,7 @@ class FilmDetail extends React.Component{
     }
     _displayFilm(){
         const film = this.state.film
+        console.log(film)
         if(film != undefined){
             return(
                 <ScrollView style={styles.scrollview_container}>
@@ -38,8 +39,10 @@ class FilmDetail extends React.Component{
                     <Text style={styles.default_text}>Note : {film.vote__average ? film.vote__average:0 }/10 </Text>
                     <Text style={styles.default_text}>Nombre de votes : {film.vote_count}</Text>
                     <Text style={styles.default_text}>Budget : {numeral(film.budget).format('0.0[.]00 $') }</Text>
-                    <Text style={styles.default_text}>Genre(s) : {film.budget}</Text>
-                    <Text style={styles.default_text}>Compagnie(s) : {film.release_date}</Text>
+                    <Text style={styles.default_text}>Genre(s) : {film.genres.map((genre)=>{return genre.name;}).join(" / ")}</Text>
+                    <Text style={styles.default_text}>Compagnie(s) : {film.production_companies.map((company)=>{
+                        return company.name;
+                    }).join(" / ")}</Text>
                 </ScrollView>
             )
         }
