@@ -12,7 +12,7 @@ class FilmDetail extends React.Component{
         }
     }
     componentDidMount(){
-        console.log('component did mount')
+        // console.log('component did mount')
         getFilmDetailFromApi(this.props.navigation.state.params.idFilm)
         .then(data=>{
             this.setState({
@@ -54,7 +54,7 @@ class FilmDetail extends React.Component{
         }
     }
     render() {
-        console.log('render')
+        // console.log('render')
         const idFilm = this.props.navigation.state.params.idFilm
         return(
             <View style={styles.main_container}>
