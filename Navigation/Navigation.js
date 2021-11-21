@@ -12,9 +12,6 @@ const SearchStackNavigator = createStackNavigator({
     },
     FilmDetail:{
         screen:FilmDetail,
-        navigationOptions:{
-            title:"Detail"
-        }
     }
 })
 export default createAppContainer(SearchStackNavigator)
