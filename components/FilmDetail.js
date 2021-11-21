@@ -1,7 +1,7 @@
 import React from 'react';
-import { StyleSheet, View, Text, ActivityIndicator } from 'react-native';
+import { StyleSheet, View, Text, ActivityIndicator, Image } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
-import { getFilmDetailFromApi } from '../API/TMDBApi';
+import { getFilmDetailFromApi, getImageFromApi } from '../API/TMDBApi';
 
 class FilmDetail extends React.Component{
     constructor(props){
@@ -26,8 +26,20 @@ class FilmDetail extends React.Component{
         if(film != undefined){
             return(
                 <ScrollView style={styles.scrollview_container}>
+                    <Image 
+                        style={styles.image}
+                        source={{uri: getImageFromApi(film.backdrop_path)}} 
+                    />
                     <Text style={styles.header_text_detail} >{film.title}</Text>
                     <Text style={styles.desc_text_deatail} >{film.overview}</Text>
+                    <View>
+                        <Text>Sortie le : {film.release_date}</Text>
+                        <Text>Note : {film.release_date}</Text>
+                        <Text>Nombre de votes : {film.release_date}</Text>
+                        <Text>Budget : {film.budget} $</Text>
+                        <Text>Genre(s) : {film.budget}</Text>
+                        <Text>Compagnie(s) : {film.release_date}</Text>
+                    </View>
                 </ScrollView>
             )
         }
@@ -66,6 +78,10 @@ const styles = StyleSheet.create({
         alignItems:'center',
         justifyContent:'center'
     },
+    image:{
+        height: 170,
+        margin: 5,
+    },
     scrollview_container:{
         flex: 1,
     },
@@ -73,10 +89,12 @@ const styles = StyleSheet.create({
         textAlign: 'center',
         fontSize: 30,
         fontWeight: 'bold',
-        margin:5
+        marginTop:5
     },
     desc_text_deatail:{
-        fontStyle: 'italic'
+        fontStyle: 'italic',
+        color: '#666666',
+        margin: 5,
     }
 })
 export default FilmDetail
