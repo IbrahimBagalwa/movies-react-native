@@ -30,7 +30,7 @@ class FilmDetail extends React.Component{
                 <ScrollView style={styles.scrollview_container}>
                     <Image 
                         style={styles.image}
-                        source={{uri: getImageFromApi(film.backdrop_path)}} 
+                        source={{uri: getImageFromApi(film.backdrop_path ? film.backdrop_path : film.poster_path)}} 
                     />
                     <Text style={styles.header_text_detail} >{film.title}</Text>
                     <Text style={styles.desc_text_deatail} >{ film.overview ? film.overview : 'Aucune description pour le moment'}</Text>
