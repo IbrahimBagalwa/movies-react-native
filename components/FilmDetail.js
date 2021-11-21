@@ -1,4 +1,5 @@
 import moment from 'moment';
+import numeral from 'numeral';
 import React from 'react';
 import { StyleSheet, View, Text, ActivityIndicator, Image } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
@@ -34,9 +35,9 @@ class FilmDetail extends React.Component{
                     <Text style={styles.header_text_detail} >{film.title}</Text>
                     <Text style={styles.desc_text_deatail} >{film.overview}</Text>
                     <Text style={styles.default_text}>Sortie le : {moment(new Date(film.release_date)).format('DD/MM/YYYY')}</Text>
-                    <Text style={styles.default_text}>Note : {film.release_date}</Text>
-                    <Text style={styles.default_text}>Nombre de votes : {film.release_date}</Text>
-                    <Text style={styles.default_text}>Budget : {film.budget} $</Text>
+                    <Text style={styles.default_text}>Note : {film.vote__average ? film.vote__average:0 }/10 </Text>
+                    <Text style={styles.default_text}>Nombre de votes : {film.vote_count}</Text>
+                    <Text style={styles.default_text}>Budget : {numeral(film.budget).format('0.0[.]00 $') }</Text>
                     <Text style={styles.default_text}>Genre(s) : {film.budget}</Text>
                     <Text style={styles.default_text}>Compagnie(s) : {film.release_date}</Text>
                 </ScrollView>
