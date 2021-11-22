@@ -4,6 +4,7 @@ import React from 'react';
 import { StyleSheet, View, Text, ActivityIndicator, Image } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 import { getFilmDetailFromApi, getImageFromApi } from '../API/TMDBApi';
+import {connect} from 'react-redux';
 
 class FilmDetail extends React.Component{
     constructor(props){
@@ -56,7 +57,7 @@ class FilmDetail extends React.Component{
         }
     }
     render() {
-        // console.log('render')
+        console.log(this.props)
         const idFilm = this.props.navigation.state.params.idFilm
         return(
             <View style={styles.main_container}>
@@ -111,4 +112,9 @@ const styles = StyleSheet.create({
         marginRight: 5,   
     }
 })
-export default FilmDetail
+const mapStateToProps = (state)=>{
+    return {
+        favoriteFilms: state.favoriteFilms
+    }
+}
+export default connect(mapStateToProps)(FilmDetail)
