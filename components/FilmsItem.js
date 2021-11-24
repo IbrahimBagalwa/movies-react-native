@@ -5,7 +5,7 @@ class FilmsItem extends React.Component{
 
   _dispalayFoviriteImage(){
     if(this.props.isFilmFavorite){
-      var sourceImage = require('../assets/like.png');
+      var sourceImage = require('../assets/ic_like.png');
       return(
         <Image 
           source={sourceImage}

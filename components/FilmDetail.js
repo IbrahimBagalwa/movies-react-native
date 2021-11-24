@@ -29,7 +29,7 @@ class FilmDetail extends React.Component{
         this.props.dispatch(action)
     }
     _displayFavoriteImage(){
-        var sourceImage = require('../assets/fav.png');
+        var sourceImage = require('../assets/ic_favorite.png');
         if(this.props.favoriteFilms.findIndex(item=> item.id === this.state.film.id) !== -1){
             sourceImage = require('../assets/like.png')  
         }
