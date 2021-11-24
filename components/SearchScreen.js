@@ -4,6 +4,7 @@ import { StyleSheet, Button, TextInput, View, FlatList, ActivityIndicator } from
 import FilmsItem from './FilmsItem';
 import {getFilmsFromApiWithSearchedText} from '../API/TMDBApi';
 import {connect} from 'react-redux';
+import FilmList from './FilmList';
 class SearchScreen extends React.Component {
     constructor(props){
         super(props)
@@ -50,10 +51,7 @@ class SearchScreen extends React.Component {
             this._loadFilms()
         })
     }
-    _displaydDetailFromFilm = (idFilm)=>{
-        // console.log("Display film detail id" + idFilm);
-        this.props.navigation.navigate("FilmDetail",{idFilm: idFilm})
-    }
+   
  render(){
     //  console.log(this.state.isLoading);
      return(
@@ -65,23 +63,13 @@ class SearchScreen extends React.Component {
                 onSubmitEditing={()=>this._searchFilm()} 
              />
              <Button style={styles.buttonStyle} title="Search" onPress={()=>this._searchFilm()}/>
-             <FlatList
-                data={this.state.films}
-                extraData = {this.props.favoriteFilms}
-                keyExtractor= {(item)=>item.id.toString()}
-                renderItem={({item})=>
-                <FilmsItem 
-                film={item} 
-                isFilmFavorite={(this.props.favoriteFilms.findIndex(film=> film.id === item.id) !== -1) ? true : false } 
-                displayDetailForFilm={this._displaydDetailFromFilm} 
-                />}
-                onEndReachedThreshold={0.5}
-                onEndReached={()=>{
-                    if(this.page <this.totalPages){
-                        this._loadFilms()
-                    }
-                }}
-             />
+             <FilmList
+                films={this.state.films}
+                loadFilms={this._loadFilms}
+                page = {this.page}
+                totalPages={this.totalPages}
+             /> 
+          
              {this._displayLoading()}
          </View>
      )
