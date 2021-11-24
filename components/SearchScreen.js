@@ -3,6 +3,7 @@ import { StyleSheet, Button, TextInput, View, FlatList, ActivityIndicator } from
 // import films from '../helpers/filmData'
 import FilmsItem from './FilmsItem';
 import {getFilmsFromApiWithSearchedText} from '../API/TMDBApi';
+import {connect} from 'react-redux';
 class SearchScreen extends React.Component {
     constructor(props){
         super(props)
@@ -66,12 +67,20 @@ class SearchScreen extends React.Component {
              <Button style={styles.buttonStyle} title="Search" onPress={()=>this._searchFilm()}/>
              <FlatList
                 data={this.state.films}
+                extraData = {this.props.favoriteFilms}
                 keyExtractor= {(item)=>item.id.toString()}
+                renderItem={({item})=>
+                <FilmsItem 
+                film={item} 
+                isFilmFavorite={(this.props.favoriteFilms.findIndex(film=> film.id === item.id) !== -1) ? true : false } 
+                displayDetailForFilm={this._displaydDetailFromFilm} 
+                />}
                 onEndReachedThreshold={0.5}
-                onEndReached={()=>{if(this.page <this.totalPages){
-                    this._loadFilms()
-                }}}
-                renderItem={({item})=><FilmsItem film={item} displayDetailForFilm={this._displaydDetailFromFilm} />}
+                onEndReached={()=>{
+                    if(this.page <this.totalPages){
+                        this._loadFilms()
+                    }
+                }}
              />
              {this._displayLoading()}
          </View>
@@ -104,4 +113,9 @@ const styles = StyleSheet.create({
         justifyContent:'center'
     }
 })
-export default SearchScreen
+const mapStateToProps = state =>{
+    return{
+        favoriteFilms: state.favoriteFilms
+    }
+}
+export default connect(mapStateToProps)(SearchScreen)

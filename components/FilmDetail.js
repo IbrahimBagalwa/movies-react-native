@@ -1,9 +1,10 @@
 import moment from 'moment';
 import numeral from 'numeral';
 import React from 'react';
-import { StyleSheet, View, Text, ActivityIndicator, Image } from 'react-native';
+import { StyleSheet, View, Text, ActivityIndicator, Image, Button, TouchableOpacity } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 import { getFilmDetailFromApi, getImageFromApi } from '../API/TMDBApi';
+import {connect} from 'react-redux';
 
 class FilmDetail extends React.Component{
     constructor(props){
@@ -23,6 +24,26 @@ class FilmDetail extends React.Component{
             })
         })
     }
+    _toggleFavorite(){
+        const action = {type: "TOGGLE_FAVORITE", value: this.state.film}
+        this.props.dispatch(action)
+    }
+    _displayFavoriteImage(){
+        var sourceImage = require('../assets/fav.png');
+        if(this.props.favoriteFilms.findIndex(item=> item.id === this.state.film.id) !== -1){
+            sourceImage = require('../assets/like.png')  
+        }
+        return(
+            <Image 
+                style={styles.favorite_Image}
+                source={sourceImage}
+            />
+        )
+    }
+
+    componentDidUpdate(){
+        console.log(this.props.favoriteFilms)
+    }
     _displayFilm(){
         const film = this.state.film
         if(film != undefined){
@@ -33,6 +54,12 @@ class FilmDetail extends React.Component{
                         source={{uri: getImageFromApi(film.backdrop_path ? film.backdrop_path : film.poster_path)}} 
                     />
                     <Text style={styles.header_text_detail} >{film.title}</Text>
+                    <TouchableOpacity
+                        style={styles.favorite_container}
+                        onPress={()=>this._toggleFavorite()}
+                    >
+                        {this._displayFavoriteImage()}
+                    </TouchableOpacity>
                     <Text style={styles.desc_text_deatail} >{ film.overview ? film.overview : 'Aucune description pour le moment'}</Text>
                     <Text style={styles.default_text}>Sortie le : {moment(new Date(film.release_date)).format('DD/MM/YYYY')}</Text>
                     <Text style={styles.default_text}>Note : {film.vote_average ? film.vote_average:0 }/10 </Text>
@@ -56,7 +83,7 @@ class FilmDetail extends React.Component{
         }
     }
     render() {
-        // console.log('render')
+        console.log(this.props)
         const idFilm = this.props.navigation.state.params.idFilm
         return(
             <View style={styles.main_container}>
@@ -109,6 +136,19 @@ const styles = StyleSheet.create({
         marginTop: 5,   
         marginLeft: 5,
         marginRight: 5,   
+    },
+    favorite_container:{
+        alignItems:'center'
+    },
+    favorite_Image:{
+        width: 40,
+        height: 40,
+        // mixBlendMode:'multiply',
     }
 })
-export default FilmDetail
+const mapStateToProps = (state)=>{
+    return {
+        favoriteFilms: state.favoriteFilms
+    }
+}
+export default connect(mapStateToProps)(FilmDetail)

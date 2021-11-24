@@ -10,7 +10,7 @@ function toggleFavorite(state = intialState, action){
                 // on supprime le film du favorie
                 nextState = {
                     ...state,
-                    favoriteFilms: favoriteFilms.filter((item, index)=> index !== favoriteFilmIndex)
+                    favoriteFilms: state.favoriteFilms.filter((item, index)=> index !== favoriteFilmIndex)
                 }
             }else{
                 // on ajoute le film parmi le favorie
