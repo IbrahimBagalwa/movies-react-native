@@ -17,7 +17,7 @@ class SearchScreen extends React.Component {
         this.searchText =""
     }
 
-    _loadFilms() {
+     _loadFilms = () => {
         if(this.searchText.length > 0){
             this.setState({isLoading: true})
             getFilmsFromApiWithSearchedText(this.searchText, this.page+1).then(data=>{
