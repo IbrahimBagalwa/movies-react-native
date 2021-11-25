@@ -1,10 +1,15 @@
 import React from "react";
 import { StyleSheet, Text } from "react-native";
+import FilmList from "./FilmList";
 
 class Favorite extends React.Component{
     render(){
         return(
-            <Text>Mes Films Favoris</Text>
+            <FilmList
+                films= {this.props.favoriteFilms}
+                navigation = {this.props.navigation}
+                favoriteList = {true}
+            />
         )
     }
 }
