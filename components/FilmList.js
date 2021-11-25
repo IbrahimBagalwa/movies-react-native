@@ -18,7 +18,7 @@ class FilmList extends React.Component{
         return(
             <FlatList
                 style={styles.list}
-                data={this.state.films}
+                data={this.props.films}
                 extraData = {this.props.favoriteFilms}
                 keyExtractor= {(item)=>item.id.toString()}
                 renderItem={({item})=>
@@ -45,7 +45,7 @@ const styles = StyleSheet.create({
 })
 const mapStateToProps = state =>{
     return{
-        favoriteFilms: state.favoriteFilms
+      favoriteFilms: state.favoriteFilms
     }
 }
 export default connect(mapStateToProps)(FilmList);

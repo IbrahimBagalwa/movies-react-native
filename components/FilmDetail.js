@@ -42,7 +42,7 @@ class FilmDetail extends React.Component{
     }
 
     componentDidUpdate(){
-        // console.log(this.props.favoriteFilms)
+        console.log(this.props.favoriteFilms)
     }
     _displayFilm(){
         const film = this.state.film

@@ -26,7 +26,8 @@ class SearchScreen extends React.Component {
                 this.setState({
                     films: [...this.state.films,...data.results],
                     isLoading:false
-                })})
+                })
+            })
         }
     }
     _searchTextInputChanged(text){
@@ -65,6 +66,7 @@ class SearchScreen extends React.Component {
              <Button style={styles.buttonStyle} title="Search" onPress={()=>this._searchFilm()}/>
              <FilmList
                 films={this.state.films}
+                navigation={this.props.navigation}
                 loadFilms={this._loadFilms}
                 page = {this.page}
                 totalPages={this.totalPages}
