@@ -22,6 +22,15 @@ const SearchStackNavigator = createStackNavigator({
         }
     }
 })
+
+const FavoritesStackNavidator = createStackNavigator({
+    Favorite:{
+        screen: Favorite,
+        navigationOptions:{
+            title: 'Favoris'
+        }
+    }
+})
 const moveviesTabNavigation = createBottomTabNavigator({
     Search: {
         screen : SearchStackNavigator,
