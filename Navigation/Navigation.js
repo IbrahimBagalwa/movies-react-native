@@ -49,7 +49,7 @@ const moveviesTabNavigation = createBottomTabNavigator({
         }
     },
     Favorite: {
-        screen : Favorite,
+        screen : FavoritesStackNavidator,
         navigationOptions:{
             tabBarIcon: ()=>{
                 return(
