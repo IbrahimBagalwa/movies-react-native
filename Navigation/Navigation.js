@@ -29,6 +29,12 @@ const FavoritesStackNavidator = createStackNavigator({
         navigationOptions:{
             title: 'Favoris'
         }
+    },
+    FilmDetail:{
+        screen: FilmDetail,
+        navigationOptions:{
+            title:'Detail'
+        }
     }
 })
 const moveviesTabNavigation = createBottomTabNavigator({
