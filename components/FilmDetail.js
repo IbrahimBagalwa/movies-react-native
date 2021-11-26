@@ -88,7 +88,7 @@ class FilmDetail extends React.Component{
             return(
                 <TouchableOpacity
                     style={styles.share_touchable_floatingactionbutton}
-                    onPress={()=>{this._shareFil()}}
+                    onPress={()=>{this._shareFilm()}}
                 >
                     <Image 
                         style={styles.share_image}
