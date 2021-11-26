@@ -38,6 +38,14 @@ class FilmDetail extends React.Component{
         //  this.state.film sera undefined et fera planter l'application
         this._shareFilm = this._shareFilm.bind(this)
     }
+    _updateNavigationParams(){
+          // Fonction pour faire passer la fonction _shareFilm et le film aux paramètres de la navigation. Ainsi on aura accès à ces données au moment de définir le headerRight
+        this.props.navigation.setParams({
+            shareFilm = this._shareFilm,
+            film = this.state.film
+        })
+
+    }
     componentDidMount(){
         // console.log('component did mount')
         getFilmDetailFromApi(this.props.navigation.state.params.idFilm)
