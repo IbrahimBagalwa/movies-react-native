@@ -47,14 +47,23 @@ class FilmDetail extends React.Component{
 
     }
     componentDidMount(){
+          // Dès que le film est chargé, on met à jour les paramètres de la navigation (avec la fonction _updateNavigationParams) pour afficher le bouton de partage
+    const favoriteFilmIndex = this.props.favoritesFilm.findIndex(item => item.id === this.props.navigation.state.params.idFilm)
+    if (favoriteFilmIndex !== -1) { 
+      this.setState({
+        film: this.props.favoritesFilm[favoriteFilmIndex]
+      }, () => { this._updateNavigationParams() })
+      return
+    }
+    
+    this.setState({ isLoading: true })
+    getFilmDetailFromApi(this.props.navigation.state.params.idFilm).then(data => {
+      this.setState({
+        film: data,
+        isLoading: false
+      }, () => { this._updateNavigationParams() })
+    })
         // console.log('component did mount')
-        getFilmDetailFromApi(this.props.navigation.state.params.idFilm)
-        .then(data=>{
-            this.setState({
-                film: data,
-                isLoading: false,
-            })
-        })
     }
     _toggleFavorite(){
         const action = {type: "TOGGLE_FAVORITE", value: this.state.film}
@@ -114,7 +123,7 @@ class FilmDetail extends React.Component{
             )
         }
     }
-    _shareFilm(){
+    _shareFilm = ()=>{
         const {film} = this.state
         Share.share({title: film.title, message:film.overview})
     }
@@ -212,6 +221,9 @@ const styles = StyleSheet.create({
       share_image: {
         width: 30,
         height: 30
+      },
+      share_touchable_headerrightbutton: {
+        marginRight: 8
       }
 })
 const mapStateToProps = (state)=>{
