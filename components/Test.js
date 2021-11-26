@@ -1,5 +1,5 @@
 import React from 'react';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, View, Platform } from 'react-native';
 
 class Test extends React.Component{
     render(){
@@ -18,7 +18,16 @@ const styles = StyleSheet.create({
         alignItems:'center'
     },
     sub_container:{
-
+        ...Platform.select({
+            ios:{
+                backgroundColor:'blue'
+            },
+            android:{
+                backgroundColor:'red'
+            }
+        }),
+        height: 50,
+        width: 50,
     }
 })
 
