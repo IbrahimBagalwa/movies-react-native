@@ -7,22 +7,22 @@ import { getFilmDetailFromApi, getImageFromApi } from '../API/TMDBApi';
 import {connect} from 'react-redux';
 
 class FilmDetail extends React.Component{
-    static navigationsOption =({navigation})=>{
+    
+    static navigationOptions = ({ navigation }) =>{
         const {params} = navigation.state
         // On accède à la fonction shareFilm et au film via les paramètres qu'on a ajouté à la navigation
         if(params.film != undefined && Platform.OS ==='ios'){
             return{
                 // On a besoin d'afficher une image, il faut donc passe par une Touchable une fois de plus
-                headerRight:
-                <TouchableOpacity
-                    style={styles.share_touchable_headerright}
-                    onPress={()=> params._shareFilm()}
-                >
-                    <Image 
-                        style={styles.share_image}
-                        source={require('../assets/ic_send_ios.png')}
-                    />
-                </TouchableOpacity>
+                headerRight:<TouchableOpacity
+                                style={styles.share_touchable_headerrightbutton}
+                                onPress={()=> params.shareFilm()}
+                            >
+                                <Image 
+                                    style={styles.share_image}
+                                    source={require('../assets/ic_send_ios.png')}
+                                />
+                            </TouchableOpacity>
             }
         }
     }
@@ -41,17 +41,17 @@ class FilmDetail extends React.Component{
     _updateNavigationParams(){
           // Fonction pour faire passer la fonction _shareFilm et le film aux paramètres de la navigation. Ainsi on aura accès à ces données au moment de définir le headerRight
         this.props.navigation.setParams({
-            shareFilm = this._shareFilm,
-            film = this.state.film
+            shareFilm: this._shareFilm,
+            film: this.state.film
         })
 
     }
     componentDidMount(){
           // Dès que le film est chargé, on met à jour les paramètres de la navigation (avec la fonction _updateNavigationParams) pour afficher le bouton de partage
-    const favoriteFilmIndex = this.props.favoritesFilm.findIndex(item => item.id === this.props.navigation.state.params.idFilm)
+    const favoriteFilmIndex = this.props.favoriteFilms.findIndex(item => item.id === this.props.navigation.state.params.idFilm)
     if (favoriteFilmIndex !== -1) { 
       this.setState({
-        film: this.props.favoritesFilm[favoriteFilmIndex]
+        film: this.props.favoriteFilms[favoriteFilmIndex]
       }, () => { this._updateNavigationParams() })
       return
     }
@@ -123,7 +123,7 @@ class FilmDetail extends React.Component{
             )
         }
     }
-    _shareFilm = ()=>{
+    _shareFilm(){
         const {film} = this.state
         Share.share({title: film.title, message:film.overview})
     }
