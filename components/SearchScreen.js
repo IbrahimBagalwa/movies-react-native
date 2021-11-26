@@ -5,6 +5,7 @@ import FilmsItem from './FilmsItem';
 import {getFilmsFromApiWithSearchedText} from '../API/TMDBApi';
 import {connect} from 'react-redux';
 import FilmList from './FilmList';
+import { SafeAreaView } from 'react-navigation';
 class SearchScreen extends React.Component {
     constructor(props){
         super(props)
@@ -17,7 +18,7 @@ class SearchScreen extends React.Component {
         this.searchText =""
     }
 
-    _loadFilms() {
+     _loadFilms = () => {
         if(this.searchText.length > 0){
             this.setState({isLoading: true})
             getFilmsFromApiWithSearchedText(this.searchText, this.page+1).then(data=>{
@@ -26,7 +27,8 @@ class SearchScreen extends React.Component {
                 this.setState({
                     films: [...this.state.films,...data.results],
                     isLoading:false
-                })})
+                })
+            })
         }
     }
     _searchTextInputChanged(text){
@@ -55,23 +57,27 @@ class SearchScreen extends React.Component {
  render(){
     //  console.log(this.state.isLoading);
      return(
-         <View style={styles.main_container}>
-             <TextInput 
-                placeholder="Titre du film..."
-                style={styles.textInputSyle} 
-                onChangeText={(text)=>this._searchTextInputChanged(text)} 
-                onSubmitEditing={()=>this._searchFilm()} 
-             />
-             <Button style={styles.buttonStyle} title="Search" onPress={()=>this._searchFilm()}/>
-             <FilmList
-                films={this.state.films}
-                loadFilms={this._loadFilms}
-                page = {this.page}
-                totalPages={this.totalPages}
-             /> 
-          
-             {this._displayLoading()}
-         </View>
+         <SafeAreaView style={styles.main_container}>
+            <View style={styles.main_container}>
+                <TextInput 
+                    placeholder="Titre du film..."
+                    style={styles.textInputSyle} 
+                    onChangeText={(text)=>this._searchTextInputChanged(text)} 
+                    onSubmitEditing={()=>this._searchFilm()} 
+                />
+                <Button style={styles.buttonStyle} title="Search" onPress={()=>this._searchFilm()}/>
+                <FilmList
+                    films={this.state.films}
+                    navigation={this.props.navigation}
+                    loadFilms={this._loadFilms}
+                    page = {this.page}
+                    totalPages={this.totalPages}
+                    favoriteList = {false}
+                /> 
+            
+                {this._displayLoading()}
+            </View>
+        </SafeAreaView>
      )
  }
 }
