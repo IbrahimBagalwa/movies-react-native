@@ -39,9 +39,9 @@ const FavoritesStackNavidator = createStackNavigator({
     }
 })
 const moveviesTabNavigation = createBottomTabNavigator({
-    // Test:{
-    //     screen: Test,
-    // },
+    Test:{
+        screen: Test,
+    },
     Search: {
         screen : SearchStackNavigator,
         navigationOptions:{
