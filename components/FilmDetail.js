@@ -1,7 +1,7 @@
 import moment from 'moment';
 import numeral from 'numeral';
 import React from 'react';
-import { StyleSheet, View, Text, ActivityIndicator, Image, Button, TouchableOpacity } from 'react-native';
+import { StyleSheet, View, Text, ActivityIndicator, Image, Button, TouchableOpacity, Platform } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 import { getFilmDetailFromApi, getImageFromApi } from '../API/TMDBApi';
 import {connect} from 'react-redux';
@@ -82,6 +82,22 @@ class FilmDetail extends React.Component{
             )
         }
     }
+    _displayFloatingActionBottom(){
+        const {film} = this.state
+        if(film != undefined && Platform.OS === 'android'){
+            return(
+                <TouchableOpacity
+                    style={styles.share_touchable_floatingactionbutton}
+                    onPress={()=>{this._shareFil()}}
+                >
+                    <Image 
+                        style={styles.share_image}
+                        source ={require('../assets/ic_send_android.png')}
+                    />
+                </TouchableOpacity>
+            )
+        }
+    }
     render() {
         console.log(this.props)
         const idFilm = this.props.navigation.state.params.idFilm
@@ -89,6 +105,7 @@ class FilmDetail extends React.Component{
             <View style={styles.main_container}>
                 {this._displayFilm()}
                 {this._displayLoading()}
+                {this._displayFloatingActionBottom()}
             </View>
         )
     }
@@ -144,7 +161,22 @@ const styles = StyleSheet.create({
         width: 40,
         height: 40,
         // mixBlendMode:'multiply',
-    }
+    },
+    share_touchable_floatingactionbutton: {
+        position: 'absolute',
+        width: 60,
+        height: 60,
+        right: 30,
+        bottom: 30,
+        borderRadius: 30,
+        backgroundColor: '#e91e63',
+        justifyContent: 'center',
+        alignItems: 'center'
+      },
+      share_image: {
+        width: 30,
+        height: 30
+      }
 })
 const mapStateToProps = (state)=>{
     return {
