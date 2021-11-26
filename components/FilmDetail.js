@@ -7,12 +7,36 @@ import { getFilmDetailFromApi, getImageFromApi } from '../API/TMDBApi';
 import {connect} from 'react-redux';
 
 class FilmDetail extends React.Component{
+    static navigationsOption =({navigation})=>{
+        const {params} = navigation.state
+        // On accède à la fonction shareFilm et au film via les paramètres qu'on a ajouté à la navigation
+        if(params.film != undefined && Platform.OS ==='ios'){
+            return{
+                // On a besoin d'afficher une image, il faut donc passe par une Touchable une fois de plus
+                headerRight:
+                <TouchableOpacity
+                    style={styles.share_touchable_headerright}
+                    onPress={()=> params._shareFilm()}
+                >
+                    <Image 
+                        style={styles.share_image}
+                        source={require('../assets/ic_send_ios.png')}
+                    />
+                </TouchableOpacity>
+            }
+        }
+    }
+
+
     constructor(props){
         super(props)
         this.state= {
             film :undefined,
             isLoading : true
         }
+         // Ne pas oublier de binder la fonction _shareFilm sinon, lorsqu'on va l'appeler depuis le headerRight de la navigation, 
+        //  this.state.film sera undefined et fera planter l'application
+        this._shareFilm = this._shareFilm.bind(this)
     }
     componentDidMount(){
         // console.log('component did mount')
