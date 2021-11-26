@@ -1,7 +1,7 @@
 import moment from 'moment';
 import numeral from 'numeral';
 import React from 'react';
-import { StyleSheet, View, Text, ActivityIndicator, Image, Button, TouchableOpacity, Platform } from 'react-native';
+import { StyleSheet, View, Text, ActivityIndicator, Image, Button, TouchableOpacity, Platform, Share } from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
 import { getFilmDetailFromApi, getImageFromApi } from '../API/TMDBApi';
 import {connect} from 'react-redux';
@@ -81,6 +81,10 @@ class FilmDetail extends React.Component{
                 </View>
             )
         }
+    }
+    _shareFilm(){
+        const {film} = this.state
+        Share.share({title: film.title, message:film.overview})
     }
     _displayFloatingActionBottom(){
         const {film} = this.state
