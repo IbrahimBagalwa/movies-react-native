@@ -5,9 +5,10 @@ import { StyleSheet, View, Text, ActivityIndicator, Image, Button, TouchableOpac
 import { ScrollView } from 'react-native-gesture-handler';
 import { getFilmDetailFromApi, getImageFromApi } from '../API/TMDBApi';
 import {connect} from 'react-redux';
+import EnlargeShrink from '../Animations/EnlargeShrink';
 
 class FilmDetail extends React.Component{
-    
+
     static navigationOptions = ({ navigation }) =>{
         const {params} = navigation.state
         // On accède à la fonction shareFilm et au film via les paramètres qu'on a ajouté à la navigation
@@ -70,15 +71,21 @@ class FilmDetail extends React.Component{
         this.props.dispatch(action)
     }
     _displayFavoriteImage(){
-        var sourceImage = require('../assets/ic_favO.png');
+        var sourceImage = require('../assets/ic_favO.png')
+        var shouldEnlarge = false
         if(this.props.favoriteFilms.findIndex(item=> item.id === this.state.film.id) !== -1){
-            sourceImage = require('../assets/ic_fav.png')  
+            sourceImage = require('../assets/ic_fav.png')
+            shouldEnlarge = true  
         }
         return(
-            <Image 
-                style={styles.favorite_Image}
-                source={sourceImage}
-            />
+            <EnlargeShrink 
+                shouldEnlarge={shouldEnlarge}
+            >
+                <Image 
+                    style={styles.favorite_Image}
+                    source={sourceImage}
+                />
+            </EnlargeShrink>
         )
     }
 
@@ -101,6 +108,7 @@ class FilmDetail extends React.Component{
                     >
                         {this._displayFavoriteImage()}
                     </TouchableOpacity>
+                   
                     <Text style={styles.desc_text_deatail} >{ film.overview ? film.overview : 'Aucune description pour le moment'}</Text>
                     <Text style={styles.default_text}>Sortie le : {moment(new Date(film.release_date)).format('DD/MM/YYYY')}</Text>
                     <Text style={styles.default_text}>Note : {film.vote_average ? film.vote_average:0 }/10 </Text>
@@ -203,8 +211,9 @@ const styles = StyleSheet.create({
         alignItems:'center'
     },
     favorite_Image:{
-        width: 40,
-        height: 40,
+        flex: 1,
+        width: null,
+        height: null,
         // mixBlendMode:'multiply',
     },
     share_touchable_floatingactionbutton: {
