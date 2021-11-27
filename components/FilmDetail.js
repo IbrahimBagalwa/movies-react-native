@@ -7,7 +7,7 @@ import { getFilmDetailFromApi, getImageFromApi } from '../API/TMDBApi';
 import {connect} from 'react-redux';
 
 class FilmDetail extends React.Component{
-    
+
     static navigationOptions = ({ navigation }) =>{
         const {params} = navigation.state
         // On accède à la fonction shareFilm et au film via les paramètres qu'on a ajouté à la navigation
@@ -203,8 +203,9 @@ const styles = StyleSheet.create({
         alignItems:'center'
     },
     favorite_Image:{
-        width: 40,
-        height: 40,
+        flex: 1,
+        width: null,
+        height: null,
         // mixBlendMode:'multiply',
     },
     share_touchable_floatingactionbutton: {
