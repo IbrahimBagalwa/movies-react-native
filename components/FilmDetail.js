@@ -5,6 +5,7 @@ import { StyleSheet, View, Text, ActivityIndicator, Image, Button, TouchableOpac
 import { ScrollView } from 'react-native-gesture-handler';
 import { getFilmDetailFromApi, getImageFromApi } from '../API/TMDBApi';
 import {connect} from 'react-redux';
+import EnlargeShrink from '../Animations/EnlargeShrink';
 
 class FilmDetail extends React.Component{
 
@@ -71,14 +72,19 @@ class FilmDetail extends React.Component{
     }
     _displayFavoriteImage(){
         var sourceImage = require('../assets/ic_favO.png');
+        var shouldEnlarge = false;
         if(this.props.favoriteFilms.findIndex(item=> item.id === this.state.film.id) !== -1){
             sourceImage = require('../assets/ic_fav.png')  
         }
         return(
-            <Image 
-                style={styles.favorite_Image}
-                source={sourceImage}
-            />
+            <EnlargeShrink 
+                shouldEnlarge={shouldEnlarge}
+            >
+                <Image 
+                    style={styles.favorite_Image}
+                    source={sourceImage}
+                />
+            </EnlargeShrink>
         )
     }
 
@@ -101,6 +107,7 @@ class FilmDetail extends React.Component{
                     >
                         {this._displayFavoriteImage()}
                     </TouchableOpacity>
+                   
                     <Text style={styles.desc_text_deatail} >{ film.overview ? film.overview : 'Aucune description pour le moment'}</Text>
                     <Text style={styles.default_text}>Sortie le : {moment(new Date(film.release_date)).format('DD/MM/YYYY')}</Text>
                     <Text style={styles.default_text}>Note : {film.vote_average ? film.vote_average:0 }/10 </Text>
