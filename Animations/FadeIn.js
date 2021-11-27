@@ -1,7 +1,7 @@
 import React from "react";
 import { Animated, Dimensions } from "react-native";
 
-class FinIn extends React.Component{
+class FadeIn extends React.Component{
     constructor(props){
         super(props)
         this.state = {
@@ -21,8 +21,9 @@ class FinIn extends React.Component{
             <Animated.View
                 style={{left:this.state.positionLeft}}
             >
-                {this.children}
+                {this.props.children}
             </Animated.View>
         )
     }
 }
+export default FadeIn
