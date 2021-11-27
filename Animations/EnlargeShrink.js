@@ -15,7 +15,7 @@ class EnlargeShrink extends React.Component{
         }
         return 40
     }
-    componentDidMount(){
+    componentDidUpdate(){
         Animated.spring(
             this.state.viewSize,
             {

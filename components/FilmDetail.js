@@ -71,10 +71,11 @@ class FilmDetail extends React.Component{
         this.props.dispatch(action)
     }
     _displayFavoriteImage(){
-        var sourceImage = require('../assets/ic_favO.png');
-        var shouldEnlarge = false;
+        var sourceImage = require('../assets/ic_favO.png')
+        var shouldEnlarge = false
         if(this.props.favoriteFilms.findIndex(item=> item.id === this.state.film.id) !== -1){
-            sourceImage = require('../assets/ic_fav.png')  
+            sourceImage = require('../assets/ic_fav.png')
+            shouldEnlarge = true  
         }
         return(
             <EnlargeShrink 
