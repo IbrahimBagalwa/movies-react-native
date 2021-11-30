@@ -8,6 +8,7 @@ class FadeIn extends React.Component{
             positionLeft: new Animated.Value(Dimensions.get('window').width)
         }
     }
+
     componentDidMount(){
         Animated.spring(
             this.state.positionLeft,
@@ -16,6 +17,7 @@ class FadeIn extends React.Component{
             }
         ).start()
     }
+    
     render(){
         return(
             <Animated.View

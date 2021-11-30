@@ -1,4 +1,4 @@
-// Components/Tests.js
+
 import React from 'react';
 import {PanResponder, Dimensions, View, StyleSheet } from 'react-native'
 
@@ -10,7 +10,7 @@ class Test extends React.Component {
       topPosition: 0,
       leftPosition: 0,
     }
-    
+
     var {height, width} = Dimensions.get('window');
     this.panResponder = PanResponder.create({
         onStartShouldSetPanResponder: (evt, gestureState) => true,

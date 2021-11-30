@@ -9,12 +9,14 @@ class EnlargeShrink extends React.Component{
             viewSize: new Animated.Value(this._getSize()) 
         }
     }
+
     _getSize(){
         if(this.props.shouldEnlarge){
             return 80
         }
         return 40
     }
+
     componentDidUpdate(){
         Animated.spring(
             this.state.viewSize,
@@ -23,6 +25,7 @@ class EnlargeShrink extends React.Component{
             }
         ).start()
     }
+    
     render(){
         return(
             <Animated.View
