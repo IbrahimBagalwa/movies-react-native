@@ -152,7 +152,7 @@ class FilmDetail extends React.Component{
         }
     }
     render() {
-        console.log(this.props)
+        // console.log(this.props)
         const idFilm = this.props.navigation.state.params.idFilm
         return(
             <View style={styles.main_container}>
