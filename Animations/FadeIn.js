@@ -9,6 +9,7 @@ class FadeIn extends React.Component{
         }
     }
 
+    
     componentDidMount(){
         Animated.spring(
             this.state.positionLeft,
